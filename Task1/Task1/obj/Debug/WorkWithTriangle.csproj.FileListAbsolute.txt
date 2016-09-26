@@ -1,0 +1,16 @@
+C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\Task1.exe.config
+C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\Task1.exe
+C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\Task1.pdb
+C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\CalculationTriangleParameters.dll
+C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\CalculationTriangleParameters.pdb
+C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\obj\Debug\WorkWithTriangle.csprojResolveAssemblyReference.cache
+C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\obj\Debug\Task1.exe
+C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\obj\Debug\Task1.pdb
+C:\UG\sharp-skb\Task1\Task1\bin\Debug\Task1.exe.config
+C:\UG\sharp-skb\Task1\Task1\obj\Debug\Task1.exe
+C:\UG\sharp-skb\Task1\Task1\obj\Debug\Task1.pdb
+C:\UG\sharp-skb\Task1\Task1\bin\Debug\Task1.exe
+C:\UG\sharp-skb\Task1\Task1\bin\Debug\Task1.pdb
+C:\UG\sharp-skb\Task1\Task1\bin\Debug\CalculationTriangleParameters.dll
+C:\UG\sharp-skb\Task1\Task1\bin\Debug\CalculationTriangleParameters.pdb
+C:\UG\sharp-skb\Task1\Task1\obj\Debug\WorkWithTriangle.csprojResolveAssemblyReference.cache

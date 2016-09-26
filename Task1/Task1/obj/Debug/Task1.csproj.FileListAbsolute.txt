@@ -1,0 +1,8 @@
+c:\users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\Task1.exe.config
+c:\users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\obj\Debug\Task1.csprojResolveAssemblyReference.cache
+c:\users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\Task1.exe
+c:\users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\Task1.pdb
+c:\users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\CalculationTriangleParameters.dll
+c:\users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\bin\Debug\CalculationTriangleParameters.pdb
+c:\users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\obj\Debug\Task1.exe
+c:\users\vagashko\documents\visual studio 2015\Projects\Task1\Task1\obj\Debug\Task1.pdb
