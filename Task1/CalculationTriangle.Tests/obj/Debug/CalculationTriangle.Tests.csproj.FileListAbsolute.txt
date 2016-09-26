@@ -1,9 +1,0 @@
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\bin\Debug\CalculationTriangle.Tests.dll
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\bin\Debug\CalculationTriangle.Tests.pdb
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\bin\Debug\CalculationTriangleParameters.dll
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\bin\Debug\CalculationTriangleParameters.pdb
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\bin\Debug\ru\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\obj\Debug\CalculationTriangle.Tests.csprojResolveAssemblyReference.cache
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\obj\Debug\CalculationTriangle.Tests.dll
-C:\Users\vagashko\documents\visual studio 2015\Projects\Task1\CalculationTriangle.Tests\obj\Debug\CalculationTriangle.Tests.pdb
