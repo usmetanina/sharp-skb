@@ -16,13 +16,12 @@ namespace WorkWithTriangle
 
             if (Convert.ToInt32(choice) < 4 && Convert.ToInt32(choice) > 0)
             {
-                if (choice.Equals("1")) triangle = new Triangle(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
-                if (choice.Equals("2")) triangle = new Triangle(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()), Console.ReadLine());
-                if (choice.Equals("3")) triangle = new Triangle(Console.ReadLine(), Console.ReadLine(), Convert.ToDouble(Console.ReadLine()));
+                if (choice.Equals("1")) triangle =  Triangle.CreateTriangleUsingThreeSides(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
+                if (choice.Equals("2")) triangle = Triangle.CreateTriangleUsingTwoSidesAndOneAngle(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
+                if (choice.Equals("3")) triangle = Triangle.CreateTriangleUsingTwoAnglesAndOneSide(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
 
-                if (triangle.GetArea() == 0)
-                    Console.WriteLine("Треугольник не существует");
-                else Console.WriteLine(triangle.GetArea());
+                triangle.CalculateTriangleArea();
+                Console.WriteLine(triangle.GetArea());
             }
         }
     }

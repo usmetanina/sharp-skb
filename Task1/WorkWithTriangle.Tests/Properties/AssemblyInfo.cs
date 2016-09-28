@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Управление общими сведениями о сборке осуществляется посредством следующего 
 // набора атрибутов. Измените значения этих атрибутов, чтобы изменить сведения,
 // связанные со сборкой.
-[assembly: AssemblyTitle("CalculationTriangle.Tests")]
+[assembly: AssemblyTitle("WorkWithTriangle.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("CalculationTriangle.Tests")]
+[assembly: AssemblyProduct("WorkWithTriangle.Tests")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Если данный проект доступен для модели COM, следующий GUID используется в качестве идентификатора библиотеки типов
-[assembly: Guid("ef2a0342-03ab-4c10-89a1-b2e3811f0d7e")]
+[assembly: Guid("18008ccc-be31-4b3b-bcaf-b2c820ce4127")]
 
 // Сведения о версии сборки состоят из следующих четырех значений:
 //
