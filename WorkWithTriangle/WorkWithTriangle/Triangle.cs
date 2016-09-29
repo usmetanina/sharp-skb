@@ -13,17 +13,19 @@ namespace WorkWithTriangle
         private double sideC;
         private double area;
 
-        public Triangle() { }
+        private Triangle(double sideA, double sideB, double sideC)
+        {
+            this.sideA = sideA;
+            this.sideB = sideB;
+            this.sideC = sideC;
+            area = CalculateTriangleArea();
+        }
 
         public static Triangle CreateTriangleUsingThreeSides(double sideA, double sideB, double sideC)
         {
-            Triangle triangle = new Triangle();
             if (IsCorrectSides(sideA, sideB, sideC))
             {
-                triangle.sideA = sideA;
-                triangle.sideB = sideB;
-                triangle.sideC = sideC;
-                triangle.area = triangle.CalculateTriangleArea();
+                Triangle triangle = new Triangle(sideA, sideB, sideC);
                 return triangle;
             }
             else
@@ -33,16 +35,11 @@ namespace WorkWithTriangle
 
         public static Triangle CreateTriangleUsingTwoSidesAndOneAngle(double firstSide, double secondSide, double angle)
         {
-            Triangle triangle = new Triangle();
 
             double thirdSide = CalculateSideUsingTwoSidesAndOneAngle(firstSide,secondSide,angle);
             if (IsCorrectSides(firstSide, secondSide, thirdSide))
             {
-                triangle.sideA = firstSide;
-                triangle.sideB = secondSide;
-                triangle.sideC = thirdSide;
-                triangle.area = triangle.CalculateTriangleArea();
-
+                Triangle triangle = new Triangle(firstSide, secondSide, thirdSide);
                 return triangle;
             }
             else
@@ -51,17 +48,12 @@ namespace WorkWithTriangle
 
         public static Triangle CreateTriangleUsingTwoAnglesAndOneSide(double firstAngle, double secondAngle, double side)
         {
-            Triangle triangle = new Triangle();
 
             double firstSide = CalculateSideUsingTwoAnglesAndOneSide(firstAngle, secondAngle, side);
             double secondSide = CalculateSideUsingTwoAnglesAndOneSide(secondAngle, firstAngle, side);
             if (IsCorrectSides(firstSide, secondSide, side))
             {
-                triangle.sideA = firstSide;
-                triangle.sideB = secondSide;
-                triangle.sideC = side;
-                triangle.area = triangle.CalculateTriangleArea();
-
+                Triangle triangle = new Triangle(firstSide, secondSide, side);
                 return triangle;
             }
             else
@@ -70,13 +62,8 @@ namespace WorkWithTriangle
 
         private double CalculateTriangleArea()
         {
-            if (IsCorrectSides(sideA, sideB, sideC))
-            {
-                double semiperimeter = (sideA + sideB + sideC) / 2; //Герона
-                return Math.Sqrt(semiperimeter * (semiperimeter - sideA) * (semiperimeter - sideB) * (semiperimeter - sideC));
-            }
-            else
-                throw new ArgumentOutOfRangeException("Треугольник с такими длинами сторон не существует!\n");
+            double semiperimeter = (sideA + sideB + sideC) / 2; //Герона
+            return Math.Sqrt(semiperimeter * (semiperimeter - sideA) * (semiperimeter - sideB) * (semiperimeter - sideC));
         }
 
         public double GetArea()
