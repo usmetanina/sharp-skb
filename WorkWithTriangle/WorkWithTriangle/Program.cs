@@ -20,7 +20,6 @@ namespace WorkWithTriangle
                 if (choice.Equals("2")) triangle = Triangle.CreateTriangleUsingTwoSidesAndOneAngle(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
                 if (choice.Equals("3")) triangle = Triangle.CreateTriangleUsingTwoAnglesAndOneSide(Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()), Convert.ToDouble(Console.ReadLine()));
 
-                triangle.CalculateTriangleArea();
                 Console.WriteLine(triangle.GetArea());
             }
         }

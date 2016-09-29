@@ -15,23 +15,19 @@ namespace WorkWithTriangle
 
         public Triangle() { }
 
-        private void SetSides(double sideA, double sideB, double sideC)             
-        {
-            this.sideA = sideA;
-            this.sideB = sideB;
-            this.sideC = sideC;
-        }
-
         public static Triangle CreateTriangleUsingThreeSides(double sideA, double sideB, double sideC)
         {
             Triangle triangle = new Triangle();
             if (IsCorrectSides(sideA, sideB, sideC))
             {
-                triangle.SetSides(sideA, sideB, sideC);
+                triangle.sideA = sideA;
+                triangle.sideB = sideB;
+                triangle.sideC = sideC;
+                triangle.area = triangle.CalculateTriangleArea();
                 return triangle;
             }
             else
-                throw new Exception("Треугольник с такими длинами сторон не существует!\n");
+                throw new ArgumentOutOfRangeException("Треугольник с такими длинами сторон не существует!\n");
         }
 
 
@@ -42,11 +38,15 @@ namespace WorkWithTriangle
             double thirdSide = CalculateSideUsingTwoSidesAndOneAngle(firstSide,secondSide,angle);
             if (IsCorrectSides(firstSide, secondSide, thirdSide))
             {
-                triangle.SetSides(firstSide, secondSide, thirdSide);
+                triangle.sideA = firstSide;
+                triangle.sideB = secondSide;
+                triangle.sideC = thirdSide;
+                triangle.area = triangle.CalculateTriangleArea();
+
                 return triangle;
             }
             else
-                throw new Exception("Треугольник с такими длинами сторон не существует!\n");
+                throw new ArgumentOutOfRangeException("Треугольник с такими длинами сторон не существует!\n");
         }
 
         public static Triangle CreateTriangleUsingTwoAnglesAndOneSide(double firstAngle, double secondAngle, double side)
@@ -57,22 +57,26 @@ namespace WorkWithTriangle
             double secondSide = CalculateSideUsingTwoAnglesAndOneSide(secondAngle, firstAngle, side);
             if (IsCorrectSides(firstSide, secondSide, side))
             {
-                triangle.SetSides(firstSide, secondSide, side);
+                triangle.sideA = firstSide;
+                triangle.sideB = secondSide;
+                triangle.sideC = side;
+                triangle.area = triangle.CalculateTriangleArea();
+
                 return triangle;
             }
             else
-                throw new Exception("Треугольник с такими длинами сторон не существует!\n");
+                throw new ArgumentOutOfRangeException("Треугольник с такими длинами сторон не существует!\n");
         }
 
-        public void CalculateTriangleArea()
+        private double CalculateTriangleArea()
         {
             if (IsCorrectSides(sideA, sideB, sideC))
             {
                 double semiperimeter = (sideA + sideB + sideC) / 2; //Герона
-                this.area= Math.Sqrt(semiperimeter * (semiperimeter - sideA) * (semiperimeter - sideB) * (semiperimeter - sideC));
+                return Math.Sqrt(semiperimeter * (semiperimeter - sideA) * (semiperimeter - sideB) * (semiperimeter - sideC));
             }
             else
-                throw new Exception("Треугольник с такими длинами сторон не существует!\n");
+                throw new ArgumentOutOfRangeException("Треугольник с такими длинами сторон не существует!\n");
         }
 
         public double GetArea()
@@ -97,7 +101,7 @@ namespace WorkWithTriangle
                 return desiredSide;
             }
             else
-                throw new Exception("Некорректно задан угол\n");
+                throw new ArgumentOutOfRangeException("Некорректно задан угол\n");
         }
 
 
@@ -112,7 +116,7 @@ namespace WorkWithTriangle
                 return desiredSide;
             }
             else
-                throw new Exception("Некорректно задан угол\n");
+                throw new ArgumentOutOfRangeException("Некорректно задан угол\n");
         }
     }
 }

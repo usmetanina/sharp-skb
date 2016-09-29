@@ -8,20 +8,19 @@ namespace WorkWithTriangle.Tests
     {
 
         [TestMethod]
-        public void Triangle_CreateTriangleWithExistingSidesMustThrowArea()
+        public void Triangle_CreateTriangleWithExistingSidesMustReturnArea()
         {
             double sideA = 3;
             double sideB = 4;
             double sideC = 5;
 
             Triangle triangle = Triangle.CreateTriangleUsingThreeSides(sideA, sideB, sideC);
-            triangle.CalculateTriangleArea();
             Assert.AreEqual(6, triangle.GetArea());
         }
 
 
         [TestMethod]
-        [ExpectedException(typeof(Exception), "Треугольник с такими длинами сторон не существует!\n")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Треугольник с такими длинами сторон не существует!\n")]
         public void Triangle_TryCreateImpossibleTriangleWithNonExistingSidesMustThrowException()
         {
             double sideA = 1;
@@ -32,7 +31,7 @@ namespace WorkWithTriangle.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception), "Треугольник с такими длинами сторон не существует!\n")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Треугольник с такими длинами сторон не существует!\n")]
         public void Triangle_TryCreateImpossibleTriangleWithZeroSideMustThrowException()
         {
             double sideA = 0;
@@ -43,7 +42,7 @@ namespace WorkWithTriangle.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception), "Некорректно задан угол\n")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Некорректно задан угол\n")]
         public void Triangle_TryCreateImpossibleTriangleWithZeroAngleMustThrowException()
         {
             double firstAngle = 0;
@@ -54,7 +53,7 @@ namespace WorkWithTriangle.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception), "Некорректно задан угол\n")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Некорректно задан угол\n")]
         public void Triangle_TryCreateImpossibleTriangleWithBigSummaTwoAngleseMustThrowException()
         {
             double firstAngle = 110;
@@ -65,20 +64,19 @@ namespace WorkWithTriangle.Tests
         }
 
         [TestMethod]
-        public void Triangle_CreateTriangleWithExistingSideAndExistingTwoAngleseMustThrowArea()
+        public void Triangle_CreateTriangleWithExistingSideAndExistingTwoAngleseMustReturnArea()
         {
             double firstAngle = 45;
             double secondAngle = 45;
             double side = 10;
 
             Triangle triangle = Triangle.CreateTriangleUsingTwoAnglesAndOneSide(firstAngle, secondAngle, side);
-            triangle.CalculateTriangleArea();
             Assert.AreEqual(25, triangle.GetArea(),1e-5);
         }
 
 
         [TestMethod]
-        [ExpectedException(typeof(Exception), "Некорректно задан угол\n")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException), "Некорректно задан угол\n")]
         public void Triangle_TryCreateImpossibleTriangleWithBigAngleMustThrowException()
         {
             double firstSide = 2;

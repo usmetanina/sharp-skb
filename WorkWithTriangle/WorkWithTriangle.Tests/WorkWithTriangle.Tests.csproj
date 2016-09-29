@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Task1\WorkWithTriangle.csproj">
+    <ProjectReference Include="..\WorkWithTriangle\WorkWithTriangle.csproj">
       <Project>{076357b6-deec-4029-94b0-4f785435f618}</Project>
       <Name>WorkWithTriangle</Name>
     </ProjectReference>
