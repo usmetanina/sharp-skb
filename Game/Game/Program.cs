@@ -8,13 +8,13 @@ namespace Game
 {
     public class Cell
     {
-        public int x { get; set; }
-        public int y { get; set; }
+        public int X { get; private set; }
+        public int Y { get; private set; }
 
         public Cell(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            X = x;
+            Y = y;
         }
     }
 
@@ -26,7 +26,8 @@ namespace Game
 
         public Game(params int[] cells)
         {
-            if (IsCorrectFieldSize(cells) && IsUniqueAndCorrectCells(cells))
+            sizeField = CalculateSize(cells);
+            if (IsUniqueAndCorrectCells(cells))
             {
                 field = new int[sizeField, sizeField];
                 cellLocation = new Cell[sizeField * sizeField];
@@ -43,13 +44,22 @@ namespace Game
             }
         }
 
+        private int CalculateSize(int[] cells)
+        {
+            if (IsCorrectFieldSize(cells))
+            {
+                return (int)Math.Sqrt(cells.Length);
+            }
+            else throw new ArgumentException("Некорректное количество ячеек");
+        }
+
         private bool IsCorrectFieldSize(int[] cells)
         {
             double dimension = Math.Sqrt(cells.Length);
-            if (int.TryParse(dimension.ToString(), out sizeField))
+            if (dimension % (int)dimension == 0)
                 return true;
             else
-                throw new ArgumentException("Некорректное количество ячеек");
+                return false;
         }
 
         private bool IsUniqueAndCorrectCells(int[] cells)
@@ -76,7 +86,11 @@ namespace Game
 
         public int this[int x, int y]
         {
-            get { return field[x, y]; }
+            get {
+                if (x >= 0 && x < sizeField && y >= 0 && y < sizeField)
+                    return field[x, y];
+                else throw new ArgumentException("Выход за пределы поля");
+            }
         }
 
         public Cell GetLocation(int value)
@@ -88,46 +102,24 @@ namespace Game
         {
             Cell currentCell = GetLocation(cell);
 
-            if (IsMovementUp(currentCell))
+            if (IsMovementUp(currentCell) || (IsMovementDown(currentCell)) ||
+                IsMovementLeft(currentCell) || IsMovementRight(currentCell))
             {
-                field[currentCell.x, currentCell.y] = 0;
-                field[cellLocation[0].x, cellLocation[0].y] = cell;
+                
+                field[cellLocation[0].X, cellLocation[0].Y] = cell;
+                field[currentCell.X, currentCell.Y] = 0;
 
-                cellLocation[cell].x--;
-                cellLocation[0].x++;
-            }
-            else if (IsMovementDown(currentCell))
-            {
-                field[currentCell.x, currentCell.y] = 0;
-                field[cellLocation[0].x, cellLocation[0].y] = cell;
-
-                cellLocation[cell].x++;
-                cellLocation[0].x--;
-            }
-            else if (IsMovementRight(currentCell))
-            {
-                field[currentCell.x, currentCell.y] = 0;
-                field[cellLocation[0].x, cellLocation[0].y] = cell;
-
-                cellLocation[cell].y++;
-                cellLocation[0].y--;
-            }
-            else if (IsMovementLeft(currentCell))
-            {
-                field[currentCell.x, currentCell.y] = 0;
-                field[cellLocation[0].x, cellLocation[0].y] = cell;
-
-                cellLocation[cell].y--;
-                cellLocation[0].y++;
+                cellLocation[cell]=GetLocation(0);
+                cellLocation[0] = currentCell;
             }
             else throw new ArgumentException("Двигать клетку невозможно");
         }
 
         private bool IsMovementUp(Cell cell)
         {
-            if (cell.x != 0)
+            if (cell.X != 0)
             {
-                if (field[cell.x - 1, cell.y] == 0)
+                if (field[cell.X - 1, cell.Y] == 0)
                     return true;
                 else return false;
 
@@ -138,9 +130,9 @@ namespace Game
 
         private bool IsMovementDown(Cell cell)
         {
-            if (cell.x != sizeField-1)
+            if (cell.X != sizeField-1)
             {
-                if (field[cell.x + 1, cell.y] == 0)
+                if (field[cell.X + 1, cell.Y] == 0)
                     return true;
                 else return false;
 
@@ -151,9 +143,9 @@ namespace Game
 
         private bool IsMovementLeft(Cell cell)
         {
-            if (cell.y != 0)
+            if (cell.Y != 0)
             {
-                if (field[cell.x, cell.y-1] == 0)
+                if (field[cell.X, cell.Y-1] == 0)
                     return true;
                 else return false;
 
@@ -163,9 +155,9 @@ namespace Game
         }
         private bool IsMovementRight(Cell cell)
         {
-            if (cell.y != sizeField-1)
+            if (cell.Y != sizeField-1)
             {
-                if (field[cell.x, cell.y + 1] == 0)
+                if (field[cell.X, cell.Y + 1] == 0)
                     return true;
                 else return false;
 

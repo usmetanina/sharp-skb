@@ -13,10 +13,10 @@ namespace Game.Tests
             Game game = new Game(1, 2, 3, 4, 5, 6, 7, 8, 0);
             game.Shift(8);
 
-            Assert.AreEqual(2,game.GetLocation(8).y);
-            Assert.AreEqual(1, game.GetLocation(0).y);
-            Assert.AreEqual(2, game.GetLocation(8).x);
-            Assert.AreEqual(2, game.GetLocation(0).x);
+            Assert.AreEqual(2,game.GetLocation(8).Y);
+            Assert.AreEqual(1, game.GetLocation(0).Y);
+            Assert.AreEqual(2, game.GetLocation(8).X);
+            Assert.AreEqual(2, game.GetLocation(0).X);
         }
 
         [TestMethod]
@@ -47,5 +47,24 @@ namespace Game.Tests
         {
             Game game = new Game(1, 2, 2, 0);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Game_TryApplyCellToIndexOverFieldSize_MustThrowException()
+        {
+            Game game = new Game(1, 2, 3, 0);
+            double cell = game[5, 6];
+        }
+
+        [TestMethod]
+        public void Game_TryApplyCellToIndex_MustReturnCell()
+        {
+            Game game = new Game(1, 2, 3, 0);
+            double cell = game[1, 0];
+
+            Assert.AreEqual(3, cell);
+        }
     }
+
+    //индексатор проверить
 }
