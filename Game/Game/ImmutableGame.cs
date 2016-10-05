@@ -28,9 +28,7 @@ namespace Game
                         newGame[i * SizeField + j] = Field[i, j];
                     }
                 }
-                int a = GetLocation(0).X;
-                int b = GetLocation(0).Y;
-                int c = SizeField;
+
                 newGame[GetLocation(0).X * SizeField + GetLocation(0).Y] = cell;
                 newGame[currentCell.X * SizeField + currentCell.Y] = 0;
 
