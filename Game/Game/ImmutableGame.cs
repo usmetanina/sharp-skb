@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    class ImmutableGame:Game
+    public class ImmutableGame:Game
     {
         public ImmutableGame(params int[] cells):base(cells)
         {

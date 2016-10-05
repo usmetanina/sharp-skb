@@ -64,7 +64,18 @@ namespace Game.Tests
 
             Assert.AreEqual(3, cell);
         }
-    }
 
-    //индексатор проверить
+        [TestMethod]
+        public void ImmutableGame_MoveCell_MustReturnUpdateGame()
+        {
+            ImmutableGame game = new ImmutableGame(1, 2, 3, 0);
+            ImmutableGame newGame = game.Shift(3);
+
+            Assert.AreEqual(3, game.Field[1,0]);
+            Assert.AreEqual(0, game.Field[1, 1]);
+
+            Assert.AreEqual(0, newGame.Field[1, 0]);
+            Assert.AreEqual(3, newGame.Field[1, 1]);
+        }
+    }
 }
