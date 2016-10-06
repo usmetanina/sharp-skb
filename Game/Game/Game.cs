@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-
     public class Cell
     {
         public readonly int X;
@@ -24,6 +23,9 @@ namespace Game
         public int SizeField { get; private set; }
         public int[,] Field  { get; private set;}
         public Cell[] CellLocation { get; private set; }
+
+        public Game(Game game)
+        {}
 
         public Game(params int[] cells)
         {
@@ -85,7 +87,7 @@ namespace Game
             else return true;
         }
 
-        public int this[int x, int y]
+        public virtual int this[int x, int y]
         {
             get
             {
@@ -95,12 +97,12 @@ namespace Game
             }
         }
 
-        public Cell GetLocation(int value)
+        public virtual Cell GetLocation(int value)
         {
             return CellLocation[value];
         }
 
-        public void Shift(int cell)
+        public virtual Game Shift(int cell)
         {
             Cell currentCell = GetLocation(cell);
 
@@ -112,11 +114,12 @@ namespace Game
 
                 CellLocation[cell] = GetLocation(0);
                 CellLocation[0] = currentCell;
+                return this;
             }
             else throw new ArgumentException("Двигать клетку невозможно");
         }
 
-        public bool IsCellsClose(Cell firsCell, Cell secondCell)
+        internal bool IsCellsClose(Cell firsCell, Cell secondCell)
         {
             return ((firsCell.X == secondCell.X) && (Math.Abs(firsCell.Y - secondCell.Y) == 1))
                  || ((firsCell.Y == secondCell.Y) && (Math.Abs(firsCell.X - secondCell.X) == 1));

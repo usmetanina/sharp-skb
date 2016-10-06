@@ -12,7 +12,7 @@ namespace Game
         {
         }
         
-        public new ImmutableGame Shift(int cell)
+        public override Game Shift(int cell)
         {
             Cell currentCell = GetLocation(cell);
 

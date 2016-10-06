@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Game
 {
-    public class ImmutableGameDecorator
+    public class ImmutableGameDecorator:Game
     {
         private ImmutableGame startGame;
         private List<int> steps;
 
-        public ImmutableGameDecorator(params int[] list)
+        public ImmutableGameDecorator(ImmutableGame startGame):base(startGame)
         {
             steps = new List<int>();
-            startGame = new ImmutableGame(list);
+            this.startGame = startGame;
         }
 
         public List<int> GetSteps()
@@ -29,7 +29,6 @@ namespace Game
 
         private Game GetCurrentGame()
         {
-            //Game currentGame = startGame;
             Game currentGame = new Game(startGame.GetStartCellsLocation());
 
             foreach (int step in steps)
@@ -39,12 +38,12 @@ namespace Game
         }
 
 
-        public Cell GetLocation(int value)
+        public override Cell GetLocation(int value)
         {
             return GetCurrentGame().GetLocation(value);
         }
 
-        public int this[int x, int y]
+        public override int this[int x, int y]
         {
             get
             {
@@ -55,16 +54,22 @@ namespace Game
             }
         }
 
-        public ImmutableGameDecorator Shift(int value)
+        public new ImmutableGameDecorator Shift(int value)
         {
             Game currentGame = GetCurrentGame();
 
             if (currentGame.IsCellsClose(currentGame.GetLocation(value), currentGame.GetLocation(0)))
-                steps.Add(value);
+            {
+                ImmutableGameDecorator newGame = new ImmutableGameDecorator(startGame);
+
+                foreach (int step in steps)
+                    newGame.steps.Add(step);
+
+                newGame.steps.Add(value);
+                return newGame;
+            }
             else
                 throw new ArgumentException("Двигать клетку невозможно");
-
-            return this;
         }
     }
 }
