@@ -18,16 +18,7 @@ namespace Game
 
             if (IsCellsClose(currentCell, GetLocation(0)))
             {
-                int[] newGame = new int[CellLocation.Length];
-
-
-                for (int i = 0; i < SizeField; i++)
-                {
-                    for (int j = 0; j < SizeField; j++)
-                    { 
-                        newGame[i * SizeField + j] = Field[i, j];
-                    }
-                }
+                int[] newGame = GetStartCellsLocation();
 
                 newGame[GetLocation(0).X * SizeField + GetLocation(0).Y] = cell;
                 newGame[currentCell.X * SizeField + currentCell.Y] = 0;
@@ -35,6 +26,20 @@ namespace Game
                 return new ImmutableGame(newGame);
             }
             else throw new ArgumentException("Двигать клетку невозможно");
+        }
+
+        public int[] GetStartCellsLocation()
+        {
+            int[] newGame = new int[CellLocation.Length];
+
+            for (int i = 0; i < SizeField; i++)
+            {
+                for (int j = 0; j < SizeField; j++)
+                {
+                    newGame[i * SizeField + j] = Field[i, j];
+                }
+            }
+            return newGame;
         }
     }
 }

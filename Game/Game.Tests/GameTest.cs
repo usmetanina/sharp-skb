@@ -77,5 +77,20 @@ namespace Game.Tests
             Assert.AreEqual(0, newGame.Field[1, 0]);
             Assert.AreEqual(3, newGame.Field[1, 1]);
         }
+
+
+        [TestMethod]
+        public void DecoratorGame_MoveCells_MustReturnStartGameAndAllSteps()
+        {
+            ImmutableGameDecorator game = new ImmutableGameDecorator(1, 2, 3, 0);
+            ImmutableGameDecorator newGame;
+            newGame=game.Shift(3);
+            newGame=game.Shift(1);
+
+            Assert.AreEqual(0, newGame[0, 0]);
+            Assert.AreEqual(2, newGame.GetSteps().Count);
+            Assert.AreEqual(1, newGame.GetStartGame().Field[0, 0]);
+        }
+      
     }
 }

@@ -116,7 +116,7 @@ namespace Game
             else throw new ArgumentException("Двигать клетку невозможно");
         }
 
-        protected bool IsCellsClose(Cell firsCell, Cell secondCell)
+        public bool IsCellsClose(Cell firsCell, Cell secondCell)
         {
             return ((firsCell.X == secondCell.X) && (Math.Abs(firsCell.Y - secondCell.Y) == 1))
                  || ((firsCell.Y == secondCell.Y) && (Math.Abs(firsCell.X - secondCell.X) == 1));
