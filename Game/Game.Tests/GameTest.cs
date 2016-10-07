@@ -12,6 +12,11 @@ namespace Game.Tests
         {
             this.game = new Game(1, 2, 3, 4, 5, 6, 7, 8, 0);
         }
+
+        protected virtual Game CreateNewGame(params int[] cells)
+        {
+            return new Game(cells);
+        }
      
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
@@ -24,21 +29,21 @@ namespace Game.Tests
         [ExpectedException(typeof(ArgumentException))]
         public void Game_TryCreateImpossibleFieldWithIncorrectSizeField_MustThrowException()
         {
-            game = new Game(1, 2, 3, 4, 0);
+            game = CreateNewGame(1, 2, 3, 4, 0);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Game_TryCreateImpossibleFieldWithIncorrectCell_MustThrowException()
         {
-            game = new Game(1, 2, 36, 0);
+            game = CreateNewGame(1, 2, 36, 0);
         }   
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void Game_TryCreateImpossibleFieldWithRepeatCell_MustThrowException()
         {
-            game = new Game(1, 2, 2, 0);
+            game = CreateNewGame(1, 2, 2, 0);
         }
 
         [TestMethod]

@@ -12,7 +12,12 @@ namespace Game.Tests
         {
             this.game = new ImmutableGame(1, 2, 3, 4, 5, 6, 7, 8, 0);
         }
-       
+
+        protected override Game CreateNewGame(params int[] cells)
+        {
+            return new ImmutableGame(cells);
+        }
+
         [TestMethod]
         public void ImmutableGame_MoveCell_MustReturnUpdateGame()
         {

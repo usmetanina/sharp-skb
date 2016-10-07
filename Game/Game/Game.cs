@@ -24,8 +24,9 @@ namespace Game
         public int[,] Field  { get; private set;}
         public Cell[] CellLocation { get; private set; }
 
-        public Game(Game game)
-        {}
+        public Game()
+        {
+        }
 
         public Game(params int[] cells)
         {

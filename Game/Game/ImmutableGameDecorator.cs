@@ -11,7 +11,7 @@ namespace Game
         private ImmutableGame startGame;
         private List<int> steps;
 
-        public ImmutableGameDecorator(ImmutableGame startGame):base(startGame)
+        public ImmutableGameDecorator(ImmutableGame startGame)
         {
             steps = new List<int>();
             this.startGame = startGame;
