@@ -12,7 +12,15 @@ namespace StorageOfID
         static void Main(string[] args)
         {
             StorageOfID storage = new StorageOfID();
-            var a = storage.Create<MyType>();
+            storage.Create<MyType>();
+            storage.Create<MyType>();
+
+            var b = storage.GetPairsByType<MyType>();
+           
+            b.Add(Guid.NewGuid(), 5);
+            b.Clear();
+
+            b = storage.GetPairsByType<MyType>();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace StorageOfID
 {
     public class StorageOfID
     {
-        Dictionary<Type, Dictionary<Guid, Object>> storageOfGuid = new Dictionary<Type, Dictionary<Guid, Object>>();
+        private Dictionary<Type, Dictionary<Guid, Object>> storageOfGuid = new Dictionary<Type, Dictionary<Guid, Object>>();
 
         public T Create<T>()
             where T : new()
@@ -25,7 +25,10 @@ namespace StorageOfID
         public Dictionary<Guid, Object> GetPairsByType<T>()
         {
             if (storageOfGuid.ContainsKey(typeof(T)))
-                return storageOfGuid[typeof(T)];
+            {
+                Dictionary<Guid, Object> pairs = new Dictionary<Guid, Object>(storageOfGuid[typeof(T)]);
+                return pairs;
+            }
             else
                 return null;
         }
