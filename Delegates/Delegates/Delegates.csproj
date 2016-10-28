@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IObservable.cs" />
     <Compile Include="IObserver.cs" />
     <Compile Include="ModelDataTable.cs" />
     <Compile Include="Processor.cs" />

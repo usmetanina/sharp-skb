@@ -8,7 +8,7 @@ namespace Delegates
 {
     class ViewDataTable : IObserver
     {
-        void IObserver.Update()
+        void IObserver.Update(List<List<int>> dateTable)
         {
      
         }

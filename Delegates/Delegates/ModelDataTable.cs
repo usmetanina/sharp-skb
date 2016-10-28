@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Delegates
 {
-    class ModelDataTable : IObservable
+    class ModelDataTable
     {
         private List<List<int>> dataTable;
         private List<IObserver> observers;
@@ -72,10 +72,10 @@ namespace Delegates
             observers.Remove(observer);
         }
 
-        public void NotifyObservers()
+        private void NotifyObservers()
         {
             foreach (IObserver observer in observers)
-                observer.Update();
+                observer.Update(dataTable);
         }
     }
 }
