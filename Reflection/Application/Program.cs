@@ -22,7 +22,9 @@ namespace Application
 
                 foreach (Type type in assembly.GetTypes())
                 {
-                    if (type.GetInterface(typeof(IPlugin).FullName) != null && !type.IsInterface)
+                    if (type.GetInterface(typeof(IPlugin).FullName) != null && 
+                        !type.IsInterface && 
+                        type.GetConstructor(Type.EmptyTypes) != null)
                     {
                         var plugin = (IPlugin)Activator.CreateInstance(type);
                         Console.WriteLine(plugin.Name);
