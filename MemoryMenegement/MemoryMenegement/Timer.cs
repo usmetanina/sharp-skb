@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MemoryMenegement
 {
-    class Timer:  IDisposable
+    class Timer : IDisposable
     {
         private readonly Stopwatch stopwatch;
+        private bool isDisposed = false;
+
         public long ElapsedMilliseconds
         {
             get
@@ -37,7 +35,24 @@ namespace MemoryMenegement
 
         public void Dispose()
         {
-            stopwatch.Stop();
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool fromFinalize)
+        {
+            if (!isDisposed)
+            {
+                if (!fromFinalize)
+                {
+                    stopwatch.Stop();
+                }
+                isDisposed = true;
+            }
+        }
+
+        ~Timer()
+        {
+            Dispose(false);
         }
     }
 }
