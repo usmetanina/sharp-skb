@@ -23,7 +23,7 @@ namespace MemoryMenegement
 
         public Timer Start()
         {
-            stopwatch.Start();
+            stopwatch.Restart();
             return this;
         }
 
