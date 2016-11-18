@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -75,9 +76,38 @@ namespace Files
                     for (var i = 0; i < fields.Length; i++)
                     {
                         var value = converter.Convert(fields[i], line.Split(',')[i]);
-                        result.Add(fields[i], line[i]);
+                        result.Add(fields[i], value);
                     }
                     yield return result;
+                }
+            }
+        }
+
+        public static IEnumerable<dynamic> ReadCsv4(string file)
+        {
+            Converter converter = new Converter();
+
+            using (var stream = new StreamReader(file))
+            {
+                var fields = stream.ReadLine().Replace("\"", "").Split(',');
+                while (true)
+                {
+                    var line = stream.ReadLine();
+                    if (line == null)
+                        yield break;
+
+                    IDictionary<string, object> dynamicDictionary = null;
+                    var expandoObject = new ExpandoObject();
+
+                    for (var i = 0; i < fields.Length; i++)
+                    {
+                        if (dynamicDictionary == null)
+                            dynamicDictionary = expandoObject;
+
+                        var value = converter.Convert(fields[i], line.Split(',')[i]);
+                        dynamicDictionary.Add(fields[i], value);
+                    }
+                    yield return dynamicDictionary;
                 }
             }
         }
