@@ -16,6 +16,13 @@ namespace Files
             {
                 Console.WriteLine(line.Name);
             }
+            foreach (var line in Reader.ReadCsv3("airquality.csv"))
+           {
+               //foreach (var item in line)
+                   Console.WriteLine(line.Count);
+           }
+
+
         }
     }
 }

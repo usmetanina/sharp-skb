@@ -48,12 +48,36 @@ namespace Files
                     var newObject = new T();
                     for (var i = 0; i < fields.Length; i++)
                     {
-                        var infoOfProp = allInfoOfProperties.First(x => x.Name == fields[i]);
-                        var convertedValue = converter.Convert(infoOfProp.Name, line.Split(',')[i]);
-                        infoOfProp.SetValue(newObject, convertedValue);
+                        var infoOfProperty = allInfoOfProperties.First(select => select.Name == fields[i]);
+                        var value = converter.Convert(infoOfProperty.Name, line.Split(',')[i]);
+                        infoOfProperty.SetValue(newObject, value);
                     }
 
                     yield return newObject;
+                }
+            }
+        }
+
+        public static IEnumerable<Dictionary<string, object>> ReadCsv3(string file)
+        {
+            Converter converter = new Converter();
+
+            using (var stream = new StreamReader(file))
+            {
+                var fields = stream.ReadLine().Replace("\"", "").Split(',');
+                while (true)
+                {
+                    var line = stream.ReadLine();
+                    if (line == null)
+                        yield break;
+
+                    Dictionary<string, object> result = new Dictionary<string, object>();
+                    for (var i = 0; i < fields.Length; i++)
+                    {
+                        var value = converter.Convert(fields[i], line.Split(',')[i]);
+                        result.Add(fields[i], line[i]);
+                    }
+                    yield return result;
                 }
             }
         }
