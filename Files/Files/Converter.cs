@@ -10,57 +10,48 @@ namespace Files
 {
     class Converter
     {
-        public object Convert(string propName, string value)
+        public object Convert(Type type, string str)
         {
-            switch (propName)
+
+            if (type == typeof(int))
+                return int.Parse(str);
+
+            else if (type == typeof(int?))
             {
-                case "Name":
-                    return ToStr(value);
-                case "Ozone":
-                    return ToIntNullable(value);
-                case "SolarR":
-                    return ToDoubleNullable(value);
-                case "Wind":
-                    return ToDouble(value);
-                case "Temp":
-                    return ToDouble(value);
-                case "Month":
-                    return ToInt(value);
-                case "Day":
-                    return ToInt(value);
-                default:
-                    throw new NotImplementedException();
+                int value;
+                if (int.TryParse(str, out value))
+                    return value;
+                else
+                    return null;
             }
-        }
+            else if (type == typeof(double))
+                return double.Parse(str);
 
-        private static string ToStr(string value)
-        {
-            if (value.Equals("NA")) return null;
-            else return value;
-        }
+            else if (type == typeof(double?))
+            {
+                double value;
+                if (double.TryParse(str, out value))
+                    return value;
+                else
+                    return null;
+            }
 
-        private static int? ToIntNullable(string value)
-        {
-            if (value.Equals("NA")) return null;
-            else return System.Convert.ToInt32(value);
-        }
+            else if (type == null)
+            {
+                if (str == "NA")
+                    return null;
 
-        private static double? ToDoubleNullable(string value)
-        {
-            if (value.Equals("NA")) return null;
-            else return System.Convert.ToDouble(value.Replace('.', ','));
-        }
+                int integerValue;
+                if (int.TryParse(str, out integerValue))
+                    return integerValue;
 
-        private static int ToInt(string value)
-        {
-            if (value.Equals("NA")) throw new ArgumentException();
-            else return System.Convert.ToInt32(value);
-        }
+                double doubleValue;
+                if (double.TryParse(str, out doubleValue))
+                    return doubleValue;
+                return str;
 
-        private static double ToDouble(string value)
-        {
-            if (value.Equals("NA")) throw new ArgumentException();
-            else return System.Convert.ToDouble(value.Replace('.',','));
+            }
+            return str;
         }
     }
 }

@@ -3,32 +3,35 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace Files
 {
     class Reader
     {
-        public static IEnumerable<string[]> ReadCsv1(string file)
+        private static IEnumerable<string[]> ReadCsv(string file)
         {
             using (StreamReader stream = new StreamReader(file))
                 while (true)
                 {
                     var currentString = stream.ReadLine();
                     if (currentString == null)
-                    {
-                        stream.Close();
-                        yield break;
-                    }
+                        break;
                     var line = currentString.Split(',');
 
-                    for (int i = 0; i < line.Length; i++)
-                    {
-                        if (line[i] == "NA")
-                            line[i] = null;
-                    }
                     yield return line;
                 }
+        }
+
+        public static IEnumerable<string[]> ReadCsv1(string file)
+        {
+            foreach (var line in ReadCsv(file))
+            {
+                for (int i = 0; i < line.Length; i++)
+                    if (line[i] == "NA")
+                        line[i] = null;
+
+                yield return line;
+            }
         }
 
 
@@ -36,21 +39,18 @@ namespace Files
         {
             Converter converter = new Converter();
             var allInfoOfProperties = typeof(T).GetProperties();
-            
-            using (var stream = new StreamReader(file))
+            string[] fields = null;
+            foreach (var line in ReadCsv(file))
             {
-                var fields = stream.ReadLine().Replace("\"", "").Split(',');
-                while (true)
+                if (fields == null)
+                    fields = line;
+                else
                 {
-                    var line = stream.ReadLine();
-                    if (line == null)
-                        yield break;
-
                     var newObject = new T();
-                    for (var i = 0; i < fields.Length; i++)
+                    for (var i = 0; i < line.Length; i++)
                     {
-                        var infoOfProperty = allInfoOfProperties.First(select => select.Name == fields[i]);
-                        var value = converter.Convert(infoOfProperty.Name, line.Split(',')[i]);
+                        var infoOfProperty = allInfoOfProperties.First(select => select.Name == fields[i].Replace("\"",""));
+                        var value = converter.Convert(infoOfProperty.PropertyType, line[i].Replace(".", ","));
                         infoOfProperty.SetValue(newObject, value);
                     }
 
@@ -62,51 +62,44 @@ namespace Files
         public static IEnumerable<Dictionary<string, object>> ReadCsv3(string file)
         {
             Converter converter = new Converter();
+            Type[] types = new Type[] { typeof(double), typeof(int), typeof(string) };
+            string[] fields = null;
 
-            using (var stream = new StreamReader(file))
+            foreach (var line in ReadCsv(file))
             {
-                var fields = stream.ReadLine().Replace("\"", "").Split(',');
-                while (true)
+                if (fields == null)
+                    fields = line;
+                else
                 {
-                    var line = stream.ReadLine();
-                    if (line == null)
-                        yield break;
-
                     Dictionary<string, object> result = new Dictionary<string, object>();
+
                     for (var i = 0; i < fields.Length; i++)
-                    {
-                        var value = converter.Convert(fields[i], line.Split(',')[i]);
-                        result.Add(fields[i], value);
-                    }
+                        result.Add(fields[i].Replace("\"", ""), converter.Convert(null,line[i].Replace(".", ",")));
+
                     yield return result;
                 }
             }
         }
 
+
         public static IEnumerable<dynamic> ReadCsv4(string file)
         {
             Converter converter = new Converter();
+            string[] fields = null;
 
-            using (var stream = new StreamReader(file))
+            foreach (var line in ReadCsv(file))
             {
-                var fields = stream.ReadLine().Replace("\"", "").Split(',');
-                while (true)
-                {
-                    var line = stream.ReadLine();
-                    if (line == null)
-                        yield break;
-
+                if (fields == null)
+                    fields = line;
+                else
+                { 
                     IDictionary<string, object> dynamicDictionary = null;
                     var expandoObject = new ExpandoObject();
+                    dynamicDictionary = expandoObject;
 
-                    for (var i = 0; i < fields.Length; i++)
-                    {
-                        if (dynamicDictionary == null)
-                            dynamicDictionary = expandoObject;
+                    for (var i = 0; i < line.Length; i++)
+                        dynamicDictionary.Add(fields[i].Replace("\"", ""), converter.Convert(null,line[i].Replace(".",",")));
 
-                        var value = converter.Convert(fields[i], line.Split(',')[i]);
-                        dynamicDictionary.Add(fields[i], value);
-                    }
                     yield return dynamicDictionary;
                 }
             }
